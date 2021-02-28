@@ -18,18 +18,22 @@ export default new Router({
       // component: HelloWorld
     },
     {
+      name:'home',
       path: '/home',
       component:home
     },
     {
+      name:'category',
       path: '/category',
       component:category
     },
     {
+      name:'cart',
       path: '/cart',
       component:cart
     },
     {
+      name:'profile',
       path: '/profile',
       component:profile
     },
@@ -41,3 +45,8 @@ export default new Router({
   ],
   mode:'history'
 })
+
+const originalPush = Router.prototype.push
+Router.prototype.push = function push (location) {
+  return originalPush.call(this, location).catch(err => err)
+}

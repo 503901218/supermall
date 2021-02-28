@@ -3,16 +3,17 @@ import {request} from './request'
 import mock from '@/mock'
 
 // 请求mock路径/detail中的数据
-export function getDetaildata(id){
+export function getDetaildata(id) {
     return request({
-        url:'/detail',
+        url: '/detail',
         // 默认为get
         // method:'get',
-        data:{
-            id:id
+        data: {
+            id: id
         },
-        
-    }) }
+
+    })
+}
 
 
 

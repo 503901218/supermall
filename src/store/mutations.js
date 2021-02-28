@@ -36,18 +36,22 @@ export default {
     //     for(var i =0;i<state.cartList.length;i++){
     //         console.log(state.cartList)
     //     }
-        
+
     //  },
     //  数量+1
-     addCounter(state,payload){
-        payload.count++
-        console.log(state.cartList)
-     },
+    addCounter(state, payload) {
+        let index;
+        let cartList = state.cartList;
+        cartList.forEach((item, index) => {
+            if (item.id === payload.id) {
+                state.cartList[index].count = state.cartList[index].count + 1
+            }
+        })
+    },
     //  addTocart加入购物车
-    addToCart(state,payload){
-      // 用于判断在购物车中是否选中
-      payload.checked=true
-      state.cartList.push(payload)
-      console.log(state.cartList)
+    addToCart(state, payload) {
+        payload.checked = true
+        payload.count = 1;
+        state.cartList.push(payload)
     }
-   }
+}

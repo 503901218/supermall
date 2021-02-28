@@ -3,11 +3,11 @@
     <!-- <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <!-- 让详情页实时获取更新数据exclude="detail" -->
-    <keep-alive exclude="detail">
-    <router-view v-if="isRouterAlive"></router-view>
- 
+    <keep-alive exclude="detail,cart">
+      <router-view v-if="isRouterAlive"></router-view>
+
     </keep-alive>
-       <mainTabar/>
+    <mainTabar/>
 
   </div>
 </template>
@@ -21,23 +21,23 @@ export default {
   components: {
     mainTabar
   },
-  provide () {    //父组件中通过provide来提供变量，在子组件中通过inject来注入变量。                                             
-            return {
-                reload: this.reload                                              
-            }
-        },
+  provide() {    //父组件中通过provide来提供变量，在子组件中通过inject来注入变量。
+    return {
+      reload: this.reload
+    }
+  },
   data() {
-      return{
-          isRouterAlive: true                    //控制视图是否显示的变量
-      }
+    return {
+      isRouterAlive: true                    //控制视图是否显示的变量
+    }
   },
   methods: {
-      reload () {
-          this.isRouterAlive = false;            //先关闭，
-          this.$nextTick(function () {
-              this.isRouterAlive = true;         //再打开
-          }) 
-      }
+    reload() {
+      this.isRouterAlive = false;            //先关闭，
+      this.$nextTick(function () {
+        this.isRouterAlive = true;         //再打开
+      })
+    }
   },
 
 
@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style>
-  @import "./assets/css/base.css";
-  
+@import "./assets/css/base.css";
+
 
 </style>
