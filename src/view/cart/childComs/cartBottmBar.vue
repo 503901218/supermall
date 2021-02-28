@@ -1,7 +1,7 @@
 <template>
   <div id="cartBottmBar">
     <div class="cartBtmLeft">
-      <div class="check" :class="{isActive:checkBtnCli}" @click="checkBtnCliAll">
+      <div class="check" :class="{isActive:isActives}" @click="checkBtnCliAll">
         √
       </div>
       <div>全选</div>
@@ -19,8 +19,7 @@ export default {
   name: 'cartBottmBar',
   data() {
     return {
-      isActives: false,
-
+      isActives: true,
     }
   },
   computed: {
@@ -62,19 +61,20 @@ export default {
       if (this.$store.state.cartList.length === 0) {
         this.isActives = false
       }
-      else{
-        this.isActives=!this.isActives
-      }
-        return this.isActives
+      // else{
+      //   this.isActives=!this.isActives
+      // }
+      
       // if(this.$store.state.cartList.filter(item=> item.checked).length)
       //   this.isActive=!this.isActive
       //console.log(this.$store.state.cartList)
       //   var fla=false
-      // for(var i=0;i<this.$store.state.cartList.length;i++){
-      //      if(!this.$store.state.cartList[i].checked){
-      //        this.isActives=false
-      //      }
-      // }
+      for(var i=0;i<this.$store.state.cartList.length;i++){
+           if(!this.$store.state.cartList[i].checked){
+             this.isActives=false
+           }
+      }
+        return this.isActives
       // if(this.isActives){
       //     for(var i=0;i<this.$store.state.cartList.length;i++){
       //         this.$store.state.cartList[i].checked=true
@@ -114,14 +114,34 @@ export default {
 
 
 
-  methods: {
-     checkBtnCliAll(){
-        // if(this.isActives){
+  methods: {        // if(this.isActives){
         //     this.cartList.forEach(item=>{item.checked=false})
         // }else{
         //       this.cartList.forEach(item=>{item.checked=true})
         // }
-        this.isActives=!this.isActives
+     checkBtnCliAll(){
+       console.log(this.isActives,this.$store.state.cartList.length)
+       if (this.$store.state.cartList.length === 0) {
+        this.isActives = false
+       }
+        else{
+           
+          this.isActives=!this.isActives
+        
+        }
+       var flag=true
+      if(this.isActives)   {
+        // 判断上方按钮是否全选中
+        for(var i=0;i<this.$store.state.cartList.length;i++){
+          if(!this.$store.state.cartList[i].checked) {
+              flag=false
+              this.isActives=flag
+          }
+        }
+      }
+       console.log(this.isActives)
+     // if(flag){ this.isActives =true}
+
         this.$store.commit('checkBtnCliAll',this.isActives)
 
         console.log(this.$store.state.cartList,this.isActives)

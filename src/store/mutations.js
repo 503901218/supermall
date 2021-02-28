@@ -65,24 +65,29 @@ export default {
     },
     // 全选按钮
     checkBtnCliAll(state,isActive){
+      // 物品只有一个时，商品按钮和全选按钮逻辑相同
+     if(state.cartList.length==1){
+      state.cartList[0].checked=isActive
+     }
       var flag=true
-      // 判断上方按钮是否全选中
-      for(var i=0;i<state.cartList.length;i++){
-        if(!state.cartList[i].checked) {
-            flag=false
-        }
-      }
-      if(flag){isActive=true}
-
-      // 判断全选按钮是否选中
-      if(isActive){
+      // 判断全选按钮是选中，购物车商品全选中
+      if(isActive&&state.cartList.length>1){
         for(var i=0;i<state.cartList.length;i++){
+          console.log(isActive,state.cartList)
           state.cartList[i].checked=true
         }
+      }//未点击全选&&购物车物品大于1，若物品全都选中 则全选按钮选中
+      else if(state.cartList.length>1&&!isActive){   
+        for(var i=0;i<state.cartList.length;i++){
+          if(!state.cartList[i].checked){
+             flag=false
+          }
+        }//商品都选中
+        if(flag){
+          // 全选按钮选中
+          isActive=true
+        }
       }
-      else{
-        isActive=false
-      }
-      console.log(state.cartList)
+      console.log(isActive,state.cartList)
     }
 }
