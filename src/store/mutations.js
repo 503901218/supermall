@@ -53,5 +53,36 @@ export default {
         payload.checked = true
         payload.count = 1;
         state.cartList.push(payload)
+    },
+    // 单选按钮点击
+    updateCheck(state,product){
+      for(var i=0;i<state.cartList.length;i++){
+        if(state.cartList[i].id==product.id){
+          state.cartList[i].checked=product.checked
+        }
+      }
+      console.log(state.cartList)
+    },
+    // 全选按钮
+    checkBtnCliAll(state,isActive){
+      var flag=true
+      // 判断上方按钮是否全选中
+      for(var i=0;i<state.cartList.length;i++){
+        if(!state.cartList[i].checked) {
+            flag=false
+        }
+      }
+      if(flag){isActive=true}
+
+      // 判断全选按钮是否选中
+      if(isActive){
+        for(var i=0;i<state.cartList.length;i++){
+          state.cartList[i].checked=true
+        }
+      }
+      else{
+        isActive=false
+      }
+      console.log(state.cartList)
     }
 }

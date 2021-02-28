@@ -37,7 +37,16 @@ export default {
   },
 
 
-  methods: {}
+  methods: {
+    //  updateCheckBtn(product){
+    //    for(var i=0;i<this.cartList.length;i++){
+    //      if(this.cartList[i].id==product.id){
+    //        this.cartList[i].checked=product.checked
+    //      }
+    //    }
+    //    console.log(this.cartList)
+    //  }
+  }
 }
 </script>
 

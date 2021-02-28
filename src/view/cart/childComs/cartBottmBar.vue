@@ -1,7 +1,7 @@
 <template>
   <div id="cartBottmBar">
     <div class="cartBtmLeft">
-      <div class="check" :class="{isActive:isActives}">
+      <div class="check" :class="{isActive:checkBtnCli}" @click="checkBtnCliAll">
         √
       </div>
       <div>全选</div>
@@ -19,7 +19,7 @@ export default {
   name: 'cartBottmBar',
   data() {
     return {
-      isActives: true,
+      isActives: false,
 
     }
   },
@@ -37,7 +37,6 @@ export default {
     },
     //计算商品数量
     calprice() {
-
       // console.log(this.cartList[0].count)
       console.log(this.cartList[0])
       //  return this.cartList.filter(item=>{
@@ -63,10 +62,13 @@ export default {
       if (this.$store.state.cartList.length === 0) {
         this.isActives = false
       }
-      //   this.isActives=!this.isActives
+      else{
+        this.isActives=!this.isActives
+      }
+        return this.isActives
       // if(this.$store.state.cartList.filter(item=> item.checked).length)
       //   this.isActive=!this.isActive
-      console.log(this.$store.state.cartList)
+      //console.log(this.$store.state.cartList)
       //   var fla=false
       // for(var i=0;i<this.$store.state.cartList.length;i++){
       //      if(!this.$store.state.cartList[i].checked){
@@ -78,7 +80,8 @@ export default {
       //         this.$store.state.cartList[i].checked=true
       //     }
       // }
-      return this.isActives = !this.$store.state.cartList.find(item => !item.checked)
+      // return this.isActives = !this.$store.state.cartList.find(item => !item.checked)
+     
     },
   },
   components: {},
@@ -108,7 +111,22 @@ export default {
   },
 
 
-  methods: {}
+
+
+
+  methods: {
+     checkBtnCliAll(){
+        // if(this.isActives){
+        //     this.cartList.forEach(item=>{item.checked=false})
+        // }else{
+        //       this.cartList.forEach(item=>{item.checked=true})
+        // }
+        this.isActives=!this.isActives
+        this.$store.commit('checkBtnCliAll',this.isActives)
+
+        console.log(this.$store.state.cartList,this.isActives)
+    }
+  }
 }
 </script>
 

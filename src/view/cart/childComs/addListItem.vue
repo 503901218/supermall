@@ -1,9 +1,10 @@
 <template>
   <div id="addListItem" :key="product.name">
     <!-- {{product}} -->
-    <div class="check" :class="{isActive:isActives}" @click="checkBtnCli">
+    <!-- <div class="check" :class="{isActive:isActives}" @click="checkBtnCli">
       √
-    </div>
+    </div> -->
+    <checkeBtn :isChecked="this.isActives" @click.native="checkBtnCli"></checkeBtn>
 
     <img class="proImg" :src="product.img" alt="">
     <div id="proInner">
@@ -21,6 +22,7 @@
 
 <script>
 import {mapGetters} from 'vuex'
+import checkeBtn from '../../../components/common/checkBtn/checkBtn'
 
 export default {
   name: 'scroll',
@@ -34,7 +36,9 @@ export default {
     // 获取vuex的getter的方法
 
   },
-  components: {},
+  components: {
+    checkeBtn
+  },
   created() {
 
   },
@@ -46,7 +50,10 @@ export default {
     checkBtnCli() {
       this.product.checked = !this.product.checked
       this.isActives = !this.isActives
+      
+      this.product.checked = this.isActives
       console.log(this.product)
+      this.$store.commit('updateCheck',this.product)
     }
   },
   props: {
