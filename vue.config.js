@@ -12,11 +12,5 @@ module.exports={
 
           }
       }
-  },
-  devServe:{
-    hot:true,
-    open:true,
-    port:8080,
-    
   }
 }
