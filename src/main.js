@@ -5,6 +5,10 @@ import store from './store/index'
 
 Vue.config.productionTip = false
 import mock from '@/mock'
+// import toast from './components/common/toast/index'
+// 安装toast插件
+Vue.use(toast)
+
 new Vue({
   render: h => h(App),
   router,

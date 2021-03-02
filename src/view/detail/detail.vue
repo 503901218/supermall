@@ -27,6 +27,8 @@
     <!-- {{$store.cartList[0]}} -->
     <!-- 返回顶部 组件不能直接监听原生函数，需要加.native修饰符-->
     <backTop @click.native="baclick" v-show="showBackTop"/>
+    <!-- message传入子组件 -->
+    <toast :message="Tmessage" :Tshow="Tshow"></toast>
   </div>
 </template>
 
@@ -42,7 +44,7 @@ import backTop from '../../components/common/backTop/backTop'
 
 import scroll from '../../components/common/betterscorll/scorll.vue'
 import goodslist from '../../components/contect/goods/goods.vue'
-
+import toast from '../../components/common/toast/toast.vue'
 
 import detailSwiper from './childComps/detailSwiper.vue'
 import detailBase from './childComps/detailBase.vue'
@@ -64,6 +66,8 @@ export default {
       },
       goodstate: 'pop',
       NabClick: [0, 500, 600, 650, Number.MAX_VALUE],
+      Tmessage:'as',
+      Tshow:false
 
 
     }
@@ -76,7 +80,8 @@ export default {
     backTop,
     goodslist,
     detailCom,
-    detailBar
+    detailBar,
+    toast
   },
   props: {
     goodsitem: {
@@ -173,8 +178,19 @@ export default {
     addBtnCli() {
       // addCart mutation内定义
       console.log(this.dat)
-      // 用actions操作用dispatch
-      this.$store.dispatch('addCart', this.dat)
+      // 加入购物车用actions操作用dispatch
+      this.$store.dispatch('addCart', this.dat).then(res=>{
+        // this.Tmessage=res
+        // this.Tshow=true
+        // setTimeout(()=>{
+        //   // 显示时间到后复原toast内容
+        //   this.Tshow=false
+        //    this.Tmessage=''
+        // },1500)
+        this.$toast.Tshow(res,1500)
+        console.log(res)
+      })
+      
       // console.log(this.$store.state.cartList)
     }
   }

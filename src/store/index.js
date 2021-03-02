@@ -12,6 +12,7 @@ const store = new Vuex.Store({
     state: {
         // 购物车 数据从detail调用addCart传入
         cartList: [],
+        selectAll:true,
         //    引入的变量mutations。。。，在下面也要有mutations声明。。
         mutations,
         actions,

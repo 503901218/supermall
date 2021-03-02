@@ -64,30 +64,36 @@ export default {
       console.log(state.cartList)
     },
     // 全选按钮
-    checkBtnCliAll(state,isActive){
+    checkBtnCliAll(state){
       // 物品只有一个时，商品按钮和全选按钮逻辑相同
      if(state.cartList.length==1){
-      state.cartList[0].checked=isActive
+      state.selectAll=!state.selectAll
+      state.cartList[0].checked=state.selectAll
      }
       var flag=true
       // 判断全选按钮是选中，购物车商品全选中
-      if(isActive&&state.cartList.length>1){
-        for(var i=0;i<state.cartList.length;i++){
-          console.log(isActive,state.cartList)
-          state.cartList[i].checked=true
-        }
-      }//未点击全选&&购物车物品大于1，若物品全都选中 则全选按钮选中
-      else if(state.cartList.length>1&&!isActive){   
-        for(var i=0;i<state.cartList.length;i++){
-          if(!state.cartList[i].checked){
-             flag=false
+      if(state.cartList.length>1){
+        state.selectAll=!state.selectAll
+        if(state.selectAll){//全选
+          for(var i=0;i<state.cartList.length;i++){
+            // console.log(isActive,state.cartList)
+            state.cartList[i].checked=state.selectAll
           }
-        }//商品都选中
-        if(flag){
-          // 全选按钮选中
-          isActive=true
         }
-      }
-      console.log(isActive,state.cartList)
+        else {  //未全选 
+          for(var i=0;i<state.cartList.length;i++){
+            if(!state.cartList[i].checked){
+               flag=false
+            }
+          }//商品都选中
+          if(flag){
+            // 全选按钮选中
+            state.selectAll=true
+          }
+        }
+        
+      }//未点击全选&&购物车物品大于1，若物品全都选中 则全选按钮选中
+     
+      console.log(state.selectAll,state.cartList)
     }
 }

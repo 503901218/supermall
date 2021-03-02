@@ -1,14 +1,14 @@
 <template>
   <div id="cartBottmBar">
     <div class="cartBtmLeft">
-      <div class="check" :class="{isActive:isActives}" @click="checkBtnCliAll">
+      <div class="check" :class="{isActive:this.$store.state.selectAll}" @click="checkBtnCliAll">
         √
       </div>
       <div>全选</div>
     </div>
 
     <div class="allmoney">合计：{{ totalPrice }}</div>
-    <div class="calmoney">去计算({{ calprice }})</div>
+    <div class="calmoney" @click="CalAll">去计算({{ calprice }})</div>
   </div>
 </template>
 
@@ -142,9 +142,14 @@ export default {
        console.log(this.isActives)
      // if(flag){ this.isActives =true}
 
-        this.$store.commit('checkBtnCliAll',this.isActives)
+        this.$store.commit('checkBtnCliAll')
+        // this.$store.commit('checkBtnCliAll',this.isActives)
 
         console.log(this.$store.state.cartList,this.isActives)
+    },
+    // 去计算
+    CalAll(){
+      this.$toast.Tshow('选中商品',2000)
     }
   }
 }
